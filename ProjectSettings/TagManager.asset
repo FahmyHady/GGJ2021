@@ -6,11 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Terrain
-  - Player_LaserBolt
-  - Player_Laser
-  - Projectile_LaserBolt
-  - Water
   - Boss
+  - MiniBoss
   layers:
   - Default
   - TransparentFX

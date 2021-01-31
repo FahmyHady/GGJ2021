@@ -11,7 +11,10 @@ public class Player : Entity
     [SerializeField] ObjectPoolBehaviour bulletPool;
     [SerializeField] Transform shootPointOne;
     [SerializeField] Transform shootPointTwo;
+    [SerializeField] Transform playerVisualMesh;
+    [SerializeField] float visualLeanAmout;
     [SerializeField] float shootRate;
+    [SerializeField] GameObject deathParticle;
     float elapsedTime;
     Rigidbody rigidbody;
     float h, v;
@@ -33,21 +36,29 @@ public class Player : Entity
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            speed *= 1.5f;
+            speed *=2;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            speed /= 1.5f;
+            speed /= 2;
         }
     }
-
+    public override void ApplyDamage(float damage, Vector3 hitLocation = default)
+    {
+        currentHP -= damage;
+        if (currentHP <= 0)
+        {
+            Instantiate(deathParticle, transform.position, Quaternion.identity);
+            gameObject.SetActive(false);
+        }
+    }
     private void Shoot()
     {
         elapsedTime = 0;
         var bulletOne = bulletPool.GetPooledObject();
         bulletOne.transform.position = shootPointOne.position;
         bulletOne.transform.rotation = shootPointOne.rotation;
-        bulletOne.SetActive(true);       
+        bulletOne.SetActive(true);
         var bulletTwo = bulletPool.GetPooledObject();
         bulletTwo.transform.position = shootPointTwo.position;
         bulletTwo.transform.rotation = shootPointTwo.rotation;
@@ -72,8 +83,7 @@ public class Player : Entity
 
     void VisualSpaceshipTurn()
     {
-        //shipModel.localEulerAngles = new Vector3(data.steeringInput.x * data.leanAmount_Y
-        //    , shipModel.localEulerAngles.y, data.steeringInput.z * data.leanAmount_X);
+        playerVisualMesh.localEulerAngles = new Vector3(playerVisualMesh.localEulerAngles.x, playerVisualMesh.localEulerAngles.y, -h * visualLeanAmout);
     }
 
 }

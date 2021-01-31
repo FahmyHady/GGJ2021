@@ -20,16 +20,18 @@ public class Bullet : MonoBehaviour
     {
         Vector3 tempPos = transform.position;
         MoveProjectile();
-        if (Physics.Linecast(tempPos, transform.position, out RaycastHit hitInfo, damagable))
+        if (Physics.Linecast(tempPos, transform.position, out RaycastHit hitInfo, damagable, QueryTriggerInteraction.Ignore))
         {
             DestroyBullet();
             if (hitInfo.transform.TryGetComponent(out Entity damageable))
             {
-                Debug.Log("hi");
-                if (hitInfo.transform.CompareTag("Boss"))
+                if (hitInfo.transform.CompareTag("MiniBoss"))
                 {
-                    ((Boss)damageable).ApplyDamage(damage,hitInfo.point);
-
+                    ((MiniBoss)damageable).ApplyDamage(damage, hitInfo.point);
+                }
+                else if (hitInfo.transform.CompareTag("Boss"))
+                {
+                    ((Boss)damageable).ApplyDamage(damage, hitInfo.point);
                 }
                 else
                 {

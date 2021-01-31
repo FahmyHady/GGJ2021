@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44c9974eb1e6684e90d640c296ed49f, type: 3}
+  m_Name: Rocks
+  m_EditorClassIdentifier: 
+  objectToPool: {fileID: 5878264590657228289, guid: 19eaaab41374c1a489d7d6c69b06085f,
+    type: 3}
+  amountToPool: 50
+  shouldExpand: 1

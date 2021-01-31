@@ -9,10 +9,20 @@ public class Spew : Entity
     [SerializeField] float speed;
     [SerializeField] Entity player;
     Rigidbody rigidbody;
+    [SerializeField] GameObject deathParticle;
 
     private void Start()
     {
-        touchDamage = FindObjectOfType<Boss>().bulletDamage;
+        MiniBoss mini = FindObjectOfType<MiniBoss>();
+        if (mini!=null)
+        {
+        touchDamage = mini.bulletDamage;
+        }
+        else
+        {
+            touchDamage = FindObjectOfType<Boss>().bulletDamage;
+
+        }
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Entity>();
         rigidbody = GetComponent<Rigidbody>();
     }
@@ -30,6 +40,7 @@ public class Spew : Entity
         {
             player.ApplyDamage(touchDamage);
         }
+        Instantiate(deathParticle, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
     }
     public override void ApplyDamage(float damage, Vector3 hitLocation = default)
@@ -37,9 +48,9 @@ public class Spew : Entity
         currentHP -= damage;
         if (currentHP <= 0)
         {
+            Instantiate(deathParticle, transform.position, Quaternion.identity);
             gameObject.SetActive(false);
         }
 
     }
-
 }

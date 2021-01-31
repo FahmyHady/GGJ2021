@@ -21,12 +21,16 @@ public class ObjectPoolBehaviour : MonoBehaviour
         {
             GameObject obj = (GameObject)Instantiate(data.objectToPool);
             obj.transform.parent = transform;
-            obj.SetActive(false);
+            StartCoroutine(DisableObjects(obj));
             pooledObjects.Add(obj);
         }
         
     }
-
+    IEnumerator DisableObjects(GameObject obj)
+    {
+        yield return new WaitForEndOfFrame();
+        obj.SetActive(false);
+    }
     public GameObject GetPooledObject()
     {
         for(int i = 0; i < pooledObjects.Count; i++)

@@ -2342,12 +2342,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35add4c90520d8a4e8e6af69ed56e66e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 4
   touchDamage: 10
   bulletDamage: 0
   currentHP: 0
   speed: 0.3
   player: {fileID: 0}
+  deathParticle: {fileID: 100000, guid: 8034cd02e6e41d54786166d2a1720032, type: 3}
 --- !u!135 &4414665473107833167
 SphereCollider:
   m_ObjectHideFlags: 0
