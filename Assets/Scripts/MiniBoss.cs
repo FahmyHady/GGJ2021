@@ -22,6 +22,10 @@ public class MiniBoss : Entity
     MeshRenderer phaseOneMeshRenderer;
     DamageVisual damageVisualiser;
     Player player;
+    public AudioSource aud;
+    public AudioClip[] auds;
+    public AudioSource camaud;
+    public AudioClip camauds;
     private void Start()
     {
         phaseOneMeshRenderer = miniBossMesh.gameObject.GetComponent<MeshRenderer>();
@@ -74,13 +78,18 @@ public class MiniBoss : Entity
         currentHP -= damage;
         if (currentHP <= 0)
         {
+            camaud.clip = camauds;
+            camaud.Play();
             Instantiate(deathParticle, transform.position, Quaternion.identity);
 
             gameObject.SetActive(false);
+            aud.PlayOneShot(auds[1]);
         }
         pulsate = true;
         SpewStuff(hitLocation);
         damageVisualiser.ShowDamage(phaseOneMeshRenderer,Color.black);
+        aud.PlayOneShot(auds[0]);
+
 
     }
     private void SpewStuff(Vector3 whereToSpew)

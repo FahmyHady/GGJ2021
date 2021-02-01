@@ -30,6 +30,8 @@ public class Boss : Entity
     Player player;
     bool rise;
     Vector3 riseTarget;
+    public AudioSource aud;
+    public AudioClip[] auds;
     private void Start()
     {
         phaseOneMeshRenderer = bossMesh.gameObject.GetComponent<MeshRenderer>();
@@ -104,10 +106,13 @@ public class Boss : Entity
                 Instantiate(deathParticle, transform.position, Quaternion.identity);
 
                 gameObject.SetActive(false);
+                aud.PlayOneShot(auds[1]);
+
             }
             pulsate = true;
             SpewStuff(hitLocation);
             damageVisualiser.ShowDamage(phaseOneMeshRenderer, Color.black);
+            aud.PlayOneShot(auds[0]);
         }
 
     }

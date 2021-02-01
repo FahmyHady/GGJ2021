@@ -7,14 +7,14 @@ public class UIHandler : MonoBehaviour
 {
     Player player;
     MiniBoss miniBoss;
-    Boss[] bosses;
+    [SerializeField]  Boss[] bosses;
     [SerializeField] Image playerHP, miniBossHP, boss1, boss2, boss3;
     bool switched;
     private void Start()
     {
         player = FindObjectOfType<Player>();
         miniBoss = FindObjectOfType<MiniBoss>();
-        bosses = FindObjectsOfType<Boss>();
+        //bosses = FindObjectsOfType<Boss>();
     }
     private void Update()
     {

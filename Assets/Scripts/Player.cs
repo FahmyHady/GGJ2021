@@ -18,6 +18,7 @@ public class Player : Entity
     float elapsedTime;
     Rigidbody rigidbody;
     float h, v;
+    public soundrand srand;
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -29,7 +30,7 @@ public class Player : Entity
         elapsedTime += Time.deltaTime;
         if (elapsedTime - shootRate >= 0)
         {
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Space))
             {
                 Shoot();
             }
@@ -63,6 +64,8 @@ public class Player : Entity
         bulletTwo.transform.position = shootPointTwo.position;
         bulletTwo.transform.rotation = shootPointTwo.rotation;
         bulletTwo.SetActive(true);
+        srand.SendMessage("randlsrsound");
+        
     }
 
     private void FixedUpdate()
